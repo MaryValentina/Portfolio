@@ -80,7 +80,7 @@ const Nav = ({openNav}:Props) => {
         <div className="flex items-center space-x-2 sm:space-x-4">
           {/* CV Button */}
           <a
-            href="/Mary_Asscoiate_se_cv_.pdf"
+            href="/Mary_Asscoiate_se_cv.pdf"
             download="Mary_Valentina_Associate_Software_Engineer_CV.pdf"
             target="_blank"
             rel="noopener noreferrer"
