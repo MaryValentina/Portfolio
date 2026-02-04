@@ -1,17 +1,19 @@
 "use client";
 
 import { NavLinks } from '@/constant/constant'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import { BiDownload } from 'react-icons/bi'
+import { CgClose } from 'react-icons/cg'
 import { FaCode } from 'react-icons/fa'
 import { HiBars3BottomRight } from 'react-icons/hi2'
 
-type Props={
-  openNav:()=>void;
+type Props = {
+  openNav: () => void;
+  closeNav: () => void;
+  isMobileMenuOpen: boolean;
 };
 
-const Nav = ({openNav}:Props) => {
+const Nav = ({ openNav, closeNav, isMobileMenuOpen }: Props) => {
   const [navBg, setNavBg] = useState(false);
 
   useEffect(() => {
@@ -78,21 +80,36 @@ const Nav = ({openNav}:Props) => {
 
         {/* Buttons */}
         <div className="flex items-center space-x-2 sm:space-x-4">
-          {/* CV Button */}
-          <a
-            href="/Mary_Asscoiate_se_cv.pdf"
-            download="Mary_Valentina_Associate_Software_Engineer_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="px-4 sm:px-8 py-2.5 sm:py-3.5 text-xs sm:text-sm cursor-pointer rounded-lg bg-blue-800 hover:bg-blue-900 transition-all duration-300 text-white flex items-center space-x-1 sm:space-x-2"
-          >
-            <BiDownload className="w-4 h-4 sm:w-5 sm:h-8" />
-            <span className="hidden sm:inline">Download CV</span>
-            <span className="sm:hidden">CV</span>
-          </a>
-          {/* Burger Menu */}
-          <HiBars3BottomRight onClick={openNav} 
-          className="w-8 h-8 cursor-pointer text-white lg:hidden" />
+          {/* CV Button - hidden when mobile menu is open so only X shows */}
+          {!isMobileMenuOpen && (
+            <a
+              href="/Mary_Asscoiate_se_cv.pdf"
+              download="Mary_Valentina_Associate_Software_Engineer_CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 sm:px-8 py-2.5 sm:py-3.5 text-xs sm:text-sm cursor-pointer rounded-lg bg-blue-800 hover:bg-blue-900 transition-all duration-300 text-white flex items-center space-x-1 sm:space-x-2"
+            >
+              <BiDownload className="w-4 h-4 sm:w-5 sm:h-8" />
+              <span className="hidden sm:inline">Download CV</span>
+              <span className="sm:hidden">CV</span>
+            </a>
+          )}
+          {/* Right corner: X when menu open, hamburger when closed */}
+          {isMobileMenuOpen ? (
+            <button
+              type="button"
+              onClick={closeNav}
+              className="lg:hidden p-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-white hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
+              aria-label="Close menu"
+            >
+              <CgClose className="w-8 h-8" />
+            </button>
+          ) : (
+            <HiBars3BottomRight
+              onClick={openNav}
+              className="w-8 h-8 cursor-pointer text-white lg:hidden"
+            />
+          )}
         </div>
       </div>
     </div>
